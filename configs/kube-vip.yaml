@@ -29,6 +29,12 @@ spec:
       value: "true"
     - name: vip_leaderelection
       value: "false"
+    - name: leaseDuration
+      value: "600"
+    - name: leaseRenewDeadline
+      value: "540"
+    - name: leaseRetryPeriod
+      value: "60"
     securityContext:
       capabilities:
         add:
@@ -42,3 +48,4 @@ spec:
     hostPath:
       path: /etc/kubernetes/admin.conf
       type: File
+status: {}
