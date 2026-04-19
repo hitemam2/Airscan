@@ -1,0 +1,352 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-04-12T20:31:50Z"
+    generateName: ingestion-6d45c79fc8-
+    labels:
+      app: ingestion
+      pod-template-hash: 6d45c79fc8
+    name: ingestion-6d45c79fc8-rzlvp
+    namespace: airscan
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: ingestion-6d45c79fc8
+      uid: 8e3ad69a-69e5-4b13-b066-0cba5825db64
+    resourceVersion: "367615"
+    uid: 40999939-51a0-443c-a644-d1466ab89592
+  spec:
+    containers:
+    - command:
+      - node
+      - index.js
+      envFrom:
+      - configMapRef:
+          name: airscan-config
+      - secretRef:
+          name: airscan-db
+      - secretRef:
+          name: airscan-mqtt
+      image: airscan-ingestion:1.0
+      imagePullPolicy: Never
+      name: ingestion
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-4qp4k
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k8s-worker1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-4qp4k
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:31Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-12T20:31:50Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:24:52Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:24:52Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-12T20:31:50Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://775e4224d433bb675e8d5a1a372e3217dcb69d177330865616a11db9c16a29ba
+      image: docker.io/library/airscan-ingestion:1.0
+      imageID: sha256:54f3f7bd8dd349cecda6c67bd2760f94ef1e4a06173db3abf2b7caf71cbc792a
+      lastState:
+        terminated:
+          containerID: containerd://a6946477e937ea786bd9326ad1eb18812ae69bb7048e8f47688a67cb4b4a7349
+          exitCode: 255
+          finishedAt: "2026-04-17T23:03:22Z"
+          reason: Unknown
+          startedAt: "2026-04-12T20:32:02Z"
+      name: ingestion
+      ready: true
+      restartCount: 1
+      started: true
+      state:
+        running:
+          startedAt: "2026-04-18T17:24:50Z"
+    hostIP: 172.16.40.113
+    hostIPs:
+    - ip: 172.16.40.113
+    phase: Running
+    podIP: 10.244.1.47
+    podIPs:
+    - ip: 10.244.1.47
+    qosClass: BestEffort
+    startTime: "2026-04-12T20:31:50Z"
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"ingestion","namespace":"airscan"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"ingestion"}},"template":{"metadata":{"labels":{"app":"ingestion"}},"spec":{"containers":[{"command":["node","index.js"],"envFrom":[{"configMapRef":{"name":"airscan-config"}},{"secretRef":{"name":"airscan-db"}},{"secretRef":{"name":"airscan-mqtt"}}],"image":"airscan-ingestion:1.0","imagePullPolicy":"Never","name":"ingestion"}]}}}}
+    creationTimestamp: "2026-04-12T17:27:42Z"
+    generation: 1
+    name: ingestion
+    namespace: airscan
+    resourceVersion: "368754"
+    uid: 295b73aa-23f4-45e2-9dab-e6b058b0f748
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: ingestion
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ingestion
+      spec:
+        containers:
+        - command:
+          - node
+          - index.js
+          envFrom:
+          - configMapRef:
+              name: airscan-config
+          - secretRef:
+              name: airscan-db
+          - secretRef:
+              name: airscan-mqtt
+          image: airscan-ingestion:1.0
+          imagePullPolicy: Never
+          name: ingestion
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-04-12T17:27:43Z"
+      lastUpdateTime: "2026-04-12T17:29:56Z"
+      message: ReplicaSet "ingestion-6d45c79fc8" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-04-19T05:47:02Z"
+      lastUpdateTime: "2026-04-19T05:47:02Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-04-12T17:27:42Z"
+    generation: 1
+    labels:
+      app: ingestion
+      pod-template-hash: 6d45c79fc8
+    name: ingestion-6d45c79fc8
+    namespace: airscan
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: ingestion
+      uid: 295b73aa-23f4-45e2-9dab-e6b058b0f748
+    resourceVersion: "368738"
+    uid: 8e3ad69a-69e5-4b13-b066-0cba5825db64
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: ingestion
+        pod-template-hash: 6d45c79fc8
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ingestion
+          pod-template-hash: 6d45c79fc8
+      spec:
+        containers:
+        - command:
+          - node
+          - index.js
+          envFrom:
+          - configMapRef:
+              name: airscan-config
+          - secretRef:
+              name: airscan-db
+          - secretRef:
+              name: airscan-mqtt
+          image: airscan-ingestion:1.0
+          imagePullPolicy: Never
+          name: ingestion
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: v1
+  data:
+    DB_DATABASE: AirscanDB
+    DB_PORT: "1433"
+    DB_SERVER: 172.16.40.111
+    MQTT_TOPIC: airscan/measurements
+    MQTT_URL: mqtts://b7f7597b80bb47a7a246e16e944f1fc5.s1.eu.hivemq.cloud:8883
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","data":{"DB_DATABASE":"AirscanDB","DB_PORT":"1433","DB_SERVER":"172.16.40.111","MQTT_TOPIC":"airscan/measurements","MQTT_URL":"mqtts://b7f7597b80bb47a7a246e16e944f1fc5.s1.eu.hivemq.cloud:8883"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"airscan-config","namespace":"airscan"}}
+    creationTimestamp: "2026-04-12T17:27:41Z"
+    name: airscan-config
+    namespace: airscan
+    resourceVersion: "43195"
+    uid: e126a34d-c9fd-4d97-b4c2-af76986b26a0
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDBTCCAe2gAwIBAgIIH6Atu+GKOVowDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczAeFw0yNjA0MTExNDU3NTNaFw0zNjA0MDgxNTAyNTNaMBUx
+      EzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+      AoIBAQCiP0OYxOoC6WvlzfTfjSOmFF/YF0BTW3CbhcojLIc34kKmcxO6OU0zqCBy
+      kGWr67Epuucne8J7esLhJgLNrCYqmb4i3trmPGKpVtKyv8K18zLc9vYblgxuzuKK
+      6mKjADOT1aVVJrxr86CwI8QHAV3vuBrBplX/GpFljTuTssYu/BrpX2n3TjhlDLiO
+      iiRPLzlnhnqzcO7pONUg9Idv07vLiDLCC+9YO/YSXq/Trz+PvD4n30oSydiGcm97
+      b/I/jUD2H8Bk4rnn3NVZcmLhjm68/u6iDIpQgM6ODgLJ3UVavtXXozPISq+db89+
+      oItsdjCi9d8TB1PT2yniFJI3bCkvAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRhopb8SulpU8oYpGPNryzf+iwtPTAV
+      BgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQArqVHPz1bu
+      7+gjqex9LUzHqeHyttSPn9XLmAs7oo6ES9KYmnIufBunCj3uSJmaTSeFfklUv98d
+      vBn+KDLFY9qcFrnxTHOqV3JpZKimE6jmtGBlnbWYAnwXzV4y9VCFu4u6yFguG8nR
+      q4Z0/XLCQc8Wr46d0GjVmKpfkOR0yf+1pNTV9yAomJ5/Q85Ek8sGtji9qyag/uEA
+      A72VlqoOh8mn6dLnar9yO4M8dgXCzDGTS+aTcjeE1YNinRQyMgp+bNQyGTW8Svvd
+      5p+MnMoiHpk4xVVWccQJ1o4tjh0L0lbuY/rgZPnGIdFE3h0ERqdn3hRQvIkzvIlE
+      DnY7PDAMi2KC
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-04-12T17:27:18Z"
+    name: kube-root-ca.crt
+    namespace: airscan
+    resourceVersion: "43166"
+    uid: 03d7064b-16a8-4279-8cd5-16828df11b62
+- apiVersion: v1
+  data:
+    DB_PASSWORD: U0FfU3RyMG5nXzIwMjZA
+    DB_USER: c2E=
+    JWT_SECRET: QWlyc2NhblNlY3JldFRyZXNMb25nMjAyNkNoYW5nZU1vaUVuUHJvZA==
+  kind: Secret
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"airscan-db","namespace":"airscan"},"stringData":{"DB_PASSWORD":"SA_Str0ng_2026@","DB_USER":"sa","JWT_SECRET":"AirscanSecretTresLong2026ChangeMoiEnProd"},"type":"Opaque"}
+    creationTimestamp: "2026-04-12T17:27:42Z"
+    name: airscan-db
+    namespace: airscan
+    resourceVersion: "43198"
+    uid: be4c57f8-42c0-43bd-a981-48e1e5c137b2
+  type: Opaque
+- apiVersion: v1
+  data:
+    MQTT_PASSWORD: SGl0ZW1hMTU3Jg==
+    MQTT_USER: aGl0ZW1h
+  kind: Secret
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Secret","metadata":{"annotations":{},"name":"airscan-mqtt","namespace":"airscan"},"stringData":{"MQTT_PASSWORD":"Hitema157\u0026","MQTT_USER":"hitema"},"type":"Opaque"}
+    creationTimestamp: "2026-04-12T17:27:42Z"
+    name: airscan-mqtt
+    namespace: airscan
+    resourceVersion: "43199"
+    uid: a995a74f-e1bf-4225-ba7a-a40651acd7bb
+  type: Opaque
+kind: List
+metadata:
+  resourceVersion: ""

@@ -1,0 +1,684 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-04-11T20:41:15Z"
+    generateName: airscan-api-5bd679b4b4-
+    labels:
+      app: airscan-api
+      pod-template-hash: 5bd679b4b4
+    name: airscan-api-5bd679b4b4-vp62h
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: airscan-api-5bd679b4b4
+      uid: 7ff5deef-c87f-4317-926a-a284b1075169
+    resourceVersion: "367629"
+    uid: 0b50aa07-ff0f-4ec2-b382-556b0a75155f
+  spec:
+    containers:
+    - env:
+      - name: DB_HOST
+        value: 172.16.40.111
+      - name: DB_PORT
+        value: "1433"
+      image: airscan-api:1.0
+      imagePullPolicy: Never
+      name: airscan-api
+      ports:
+      - containerPort: 3000
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-lkjq7
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k8s-worker1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-lkjq7
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:44Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-11T20:44:15Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:44Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:44Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-11T20:41:16Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://9b10dfee0777c64cfa8e1cd7b1b853ce77065a60203d49819d34875055211f26
+      image: docker.io/library/airscan-api:1.0
+      imageID: sha256:145567be1c2b1016e5d548a193a5dbc2f0efbd91c5552f2ee4ff80506b423602
+      lastState:
+        terminated:
+          containerID: containerd://c3c8c4cdc02708c420ff853c3a55a95e8e1f7a93b7983d73e0e2cd1106ff2632
+          exitCode: 255
+          finishedAt: "2026-04-17T23:03:22Z"
+          reason: Unknown
+          startedAt: "2026-04-12T17:01:09Z"
+      name: airscan-api
+      ready: true
+      restartCount: 2
+      started: true
+      state:
+        running:
+          startedAt: "2026-04-18T17:23:44Z"
+    hostIP: 172.16.40.113
+    hostIPs:
+    - ip: 172.16.40.113
+    phase: Running
+    podIP: 10.244.1.46
+    podIPs:
+    - ip: 10.244.1.46
+    qosClass: BestEffort
+    startTime: "2026-04-11T20:44:15Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2026-04-13T11:17:44Z"
+    generateName: airscan-web-7cf776dfd-
+    labels:
+      app: airscan-web
+      pod-template-hash: 7cf776dfd
+    name: airscan-web-7cf776dfd-z5msd
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: airscan-web-7cf776dfd
+      uid: 5f62afd3-ca32-417d-b043-283952800f2c
+    resourceVersion: "367639"
+    uid: 16b93ed0-f93f-494b-8d7f-1c728f755ef2
+  spec:
+    containers:
+    - image: airscan-web:1.0
+      imagePullPolicy: Never
+      name: web
+      ports:
+      - containerPort: 80
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-rh8kz
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: k8s-worker1
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-rh8kz
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:31Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-13T11:17:46Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:31Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-18T17:23:31Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2026-04-13T11:17:45Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: containerd://2199b2a82cfcfaed2b90607b8be1e7358a4da2601d433ac8071081ecfae02130
+      image: docker.io/library/airscan-web:1.0
+      imageID: sha256:1ca44aff53474c5feafb82f0fa449469138ae9040696db6d039eeefcb563983d
+      lastState:
+        terminated:
+          containerID: containerd://87489fdaa331bd2f859df2bc6c2adf80b02c6829947d239152b764ddf0212d9c
+          exitCode: 255
+          finishedAt: "2026-04-17T23:03:22Z"
+          reason: Unknown
+          startedAt: "2026-04-13T11:17:59Z"
+      name: web
+      ready: true
+      restartCount: 1
+      started: true
+      state:
+        running:
+          startedAt: "2026-04-18T17:23:30Z"
+    hostIP: 172.16.40.113
+    hostIPs:
+    - ip: 172.16.40.113
+    phase: Running
+    podIP: 10.244.1.44
+    podIPs:
+    - ip: 10.244.1.44
+    qosClass: BestEffort
+    startTime: "2026-04-13T11:17:46Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"airscan-api","namespace":"default"},"spec":{"ports":[{"nodePort":30080,"port":3000,"targetPort":3000}],"selector":{"app":"airscan-api"},"type":"NodePort"}}
+    creationTimestamp: "2026-04-11T20:14:38Z"
+    name: airscan-api
+    namespace: default
+    resourceVersion: "6056"
+    uid: 90744840-6b62-410f-9380-935a27778aed
+  spec:
+    clusterIP: 10.107.106.38
+    clusterIPs:
+    - 10.107.106.38
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - nodePort: 30080
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: airscan-api
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"airscan-web","namespace":"default"},"spec":{"ports":[{"nodePort":30081,"port":80,"targetPort":80}],"selector":{"app":"airscan-web"},"type":"NodePort"}}
+    creationTimestamp: "2026-04-11T23:33:59Z"
+    name: airscan-web
+    namespace: default
+    resourceVersion: "12771"
+    uid: bf4777fe-d876-4fa7-be83-6dd7ea9d6526
+  spec:
+    clusterIP: 10.106.19.181
+    clusterIPs:
+    - 10.106.19.181
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - nodePort: 30081
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    selector:
+      app: airscan-web
+    sessionAffinity: None
+    type: NodePort
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2026-04-11T15:06:12Z"
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "274"
+    uid: a1e533e8-c491-44ac-9083-3bea7a6767a7
+  spec:
+    clusterIP: 10.96.0.1
+    clusterIPs:
+    - 10.96.0.1
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"airscan-api","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"airscan-api"}},"template":{"metadata":{"labels":{"app":"airscan-api"}},"spec":{"containers":[{"env":[{"name":"DB_HOST","value":"172.16.40.111"},{"name":"DB_PORT","value":"1433"}],"image":"airscan-api:1.0","imagePullPolicy":"Never","name":"airscan-api","ports":[{"containerPort":3000}]}]}}}}
+    creationTimestamp: "2026-04-11T20:14:34Z"
+    generation: 1
+    name: airscan-api
+    namespace: default
+    resourceVersion: "368753"
+    uid: a6db7c39-3bab-4f46-8b28-2124d925a16f
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: airscan-api
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: airscan-api
+      spec:
+        containers:
+        - env:
+          - name: DB_HOST
+            value: 172.16.40.111
+          - name: DB_PORT
+            value: "1433"
+          image: airscan-api:1.0
+          imagePullPolicy: Never
+          name: airscan-api
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-04-11T20:41:17Z"
+      lastUpdateTime: "2026-04-11T20:41:30Z"
+      message: ReplicaSet "airscan-api-5bd679b4b4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-04-19T05:47:03Z"
+      lastUpdateTime: "2026-04-19T05:47:03Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"airscan-web","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"airscan-web"}},"template":{"metadata":{"labels":{"app":"airscan-web"}},"spec":{"containers":[{"image":"airscan-web:1.0","imagePullPolicy":"Never","name":"web","ports":[{"containerPort":80}]}]}}}}
+    creationTimestamp: "2026-04-11T23:33:57Z"
+    generation: 1
+    name: airscan-web
+    namespace: default
+    resourceVersion: "368752"
+    uid: 8f52fad9-0f55-4754-ad15-41ce6b28c7f3
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: airscan-web
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: airscan-web
+      spec:
+        containers:
+        - image: airscan-web:1.0
+          imagePullPolicy: Never
+          name: web
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2026-04-11T23:35:39Z"
+      lastUpdateTime: "2026-04-11T23:35:54Z"
+      message: ReplicaSet "airscan-web-7cf776dfd" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    - lastTransitionTime: "2026-04-19T05:47:02Z"
+      lastUpdateTime: "2026-04-19T05:47:02Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-04-11T20:18:47Z"
+    generation: 1
+    labels:
+      app: airscan-api
+      pod-template-hash: 5bd679b4b4
+    name: airscan-api-5bd679b4b4
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: airscan-api
+      uid: a6db7c39-3bab-4f46-8b28-2124d925a16f
+    resourceVersion: "368741"
+    uid: 7ff5deef-c87f-4317-926a-a284b1075169
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: airscan-api
+        pod-template-hash: 5bd679b4b4
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: airscan-api
+          pod-template-hash: 5bd679b4b4
+      spec:
+        containers:
+        - env:
+          - name: DB_HOST
+            value: 172.16.40.111
+          - name: DB_PORT
+            value: "1433"
+          image: airscan-api:1.0
+          imagePullPolicy: Never
+          name: airscan-api
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "1"
+      deployment.kubernetes.io/max-replicas: "2"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2026-04-11T23:35:39Z"
+    generation: 1
+    labels:
+      app: airscan-web
+      pod-template-hash: 7cf776dfd
+    name: airscan-web-7cf776dfd
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: airscan-web
+      uid: 8f52fad9-0f55-4754-ad15-41ce6b28c7f3
+    resourceVersion: "368739"
+    uid: 5f62afd3-ca32-417d-b043-283952800f2c
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: airscan-web
+        pod-template-hash: 7cf776dfd
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: airscan-web
+          pod-template-hash: 7cf776dfd
+      spec:
+        containers:
+        - image: airscan-web:1.0
+          imagePullPolicy: Never
+          name: web
+          ports:
+          - containerPort: 80
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    fullyLabeledReplicas: 1
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+- apiVersion: v1
+  data:
+    ca.crt: |
+      -----BEGIN CERTIFICATE-----
+      MIIDBTCCAe2gAwIBAgIIH6Atu+GKOVowDQYJKoZIhvcNAQELBQAwFTETMBEGA1UE
+      AxMKa3ViZXJuZXRlczAeFw0yNjA0MTExNDU3NTNaFw0zNjA0MDgxNTAyNTNaMBUx
+      EzARBgNVBAMTCmt1YmVybmV0ZXMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEK
+      AoIBAQCiP0OYxOoC6WvlzfTfjSOmFF/YF0BTW3CbhcojLIc34kKmcxO6OU0zqCBy
+      kGWr67Epuucne8J7esLhJgLNrCYqmb4i3trmPGKpVtKyv8K18zLc9vYblgxuzuKK
+      6mKjADOT1aVVJrxr86CwI8QHAV3vuBrBplX/GpFljTuTssYu/BrpX2n3TjhlDLiO
+      iiRPLzlnhnqzcO7pONUg9Idv07vLiDLCC+9YO/YSXq/Trz+PvD4n30oSydiGcm97
+      b/I/jUD2H8Bk4rnn3NVZcmLhjm68/u6iDIpQgM6ODgLJ3UVavtXXozPISq+db89+
+      oItsdjCi9d8TB1PT2yniFJI3bCkvAgMBAAGjWTBXMA4GA1UdDwEB/wQEAwICpDAP
+      BgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRhopb8SulpU8oYpGPNryzf+iwtPTAV
+      BgNVHREEDjAMggprdWJlcm5ldGVzMA0GCSqGSIb3DQEBCwUAA4IBAQArqVHPz1bu
+      7+gjqex9LUzHqeHyttSPn9XLmAs7oo6ES9KYmnIufBunCj3uSJmaTSeFfklUv98d
+      vBn+KDLFY9qcFrnxTHOqV3JpZKimE6jmtGBlnbWYAnwXzV4y9VCFu4u6yFguG8nR
+      q4Z0/XLCQc8Wr46d0GjVmKpfkOR0yf+1pNTV9yAomJ5/Q85Ek8sGtji9qyag/uEA
+      A72VlqoOh8mn6dLnar9yO4M8dgXCzDGTS+aTcjeE1YNinRQyMgp+bNQyGTW8Svvd
+      5p+MnMoiHpk4xVVWccQJ1o4tjh0L0lbuY/rgZPnGIdFE3h0ERqdn3hRQvIkzvIlE
+      DnY7PDAMi2KC
+      -----END CERTIFICATE-----
+  kind: ConfigMap
+  metadata:
+    annotations:
+      kubernetes.io/description: Contains a CA bundle that can be used to verify the
+        kube-apiserver when using internal endpoints such as the internal service
+        IP or kubernetes.default.svc. No other usage is guaranteed across distributions
+        of Kubernetes clusters.
+    creationTimestamp: "2026-04-11T15:06:51Z"
+    name: kube-root-ca.crt
+    namespace: default
+    resourceVersion: "446"
+    uid: 4324e8b5-0248-4e7f-8344-e1a5c020ba06
+- apiVersion: v1
+  data:
+    tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUZQakNDQkNhZ0F3SUJBZ0lUTWdBQUFBWksrOXJ5SEJqNTJBQUFBQUFBQmpBTkJna3Foa2lHOXcwQkFRc0YKQURCSU1STXdFUVlLQ1pJbWlaUHlMR1FCR1JZRFkyOXRNUmd3RmdZS0NaSW1pWlB5TEdRQkdSWUlZV1Z5WVd4cApibXN4RnpBVkJnTlZCQU1URGtGRlVrRk1TVTVMTFVOQkxUQXhNQjRYRFRJMk1EUXhOREl3TkRZeU5sb1hEVEk0Ck1EUXhNekl3TkRZeU5sb3dIekVkTUJzR0ExVUVBeE1VWVdseWMyTmhiaTVoWlhKaGJHbHVheTVqYjIwd2dnRWkKTUEwR0NTcUdTSWIzRFFFQkFRVUFBNElCRHdBd2dnRUtBb0lCQVFEV1hmdUo2ZEhWSzBUODhSb0lJY2lyNVhUdwpBU21Pemd5MkFMN290VloyMXVjMUlkWTVTRlZtVk04UytPWVRkQS9EOWRwN21iYTZYMlFBcitvNHdHeW9LYVJtCnBjU0JiSFFPdTBxMzdpWHNlRmRVK0lFWUZwd3JyaHFwTTgyVVY0VXNBK2s1SUFnS1AvVFV0R1dLV3BmMklDK2gKUER4ektPSnRBYTYyNTF0aHJvOXRyMjJYZldQMlc5cGNUNXZOQm9QK01rSUJFSDNxMEdXMmdKb1owNlpKamgrcgpmbTAySXVici82REJ5YndWMXlBUTdoU3UwS0l0MDJLK1VPNXRaRzhseXNRMy9yMmcvNmxLN3JhVjk1UUwvaDMwCmRTek5RbjRDRFp2OUdhKzE4N1NXcGhqMHNWYVdYeUhSUGNSbyswcmdhN2lrbjdrc21LTnRabks2NEZGYkFnTUIKQUFHamdnSklNSUlDUkRBZkJnTlZIUkVFR0RBV2doUmhhWEp6WTJGdUxtRmxjbUZzYVc1ckxtTnZiVEFkQmdOVgpIUTRFRmdRVUtIR0J4MWJqbS9XTTRvc3pweDZEVE5ZNC9JWXdId1lEVlIwakJCZ3dGb0FVKzNMWU5FWGI4THZ0CmJBb29qMm9VbVYyV0hzUXdnZFFHQTFVZEh3U0J6RENCeVRDQnhxQ0J3NkNCd0lhQnZXeGtZWEE2THk4dlEwNDkKUVVWU1FVeEpUa3N0UTBFdE1ERXNRMDQ5UTBFdFFVVlNRVXhKVGtzdE1ERXNRMDQ5UTBSUUxFTk9QVkIxWW14cApZeVV5TUV0bGVTVXlNRk5sY25acFkyVnpMRU5PUFZObGNuWnBZMlZ6TEVOT1BVTnZibVpwWjNWeVlYUnBiMjRzClJFTTlZV1Z5WVd4cGJtc3NSRU05WTI5dFAyTmxjblJwWm1sallYUmxVbVYyYjJOaGRHbHZia3hwYzNRL1ltRnoKWlQ5dlltcGxZM1JEYkdGemN6MWpVa3hFYVhOMGNtbGlkWFJwYjI1UWIybHVkRENCd1FZSUt3WUJCUVVIQVFFRQpnYlF3Z2JFd2dhNEdDQ3NHQVFVRkJ6QUNob0doYkdSaGNEb3ZMeTlEVGoxQlJWSkJURWxPU3kxRFFTMHdNU3hEClRqMUJTVUVzUTA0OVVIVmliR2xqSlRJd1MyVjVKVEl3VTJWeWRtbGpaWE1zUTA0OVUyVnlkbWxqWlhNc1EwNDkKUTI5dVptbG5kWEpoZEdsdmJpeEVRejFoWlhKaGJHbHVheXhFUXoxamIyMC9ZMEZEWlhKMGFXWnBZMkYwWlQ5aQpZWE5sUDI5aWFtVmpkRU5zWVhOelBXTmxjblJwWm1sallYUnBiMjVCZFhSb2IzSnBkSGt3SVFZSkt3WUJCQUdDCk54UUNCQlFlRWdCWEFHVUFZZ0JUQUdVQWNnQjJBR1VBY2pBT0JnTlZIUThCQWY4RUJBTUNCYUF3RXdZRFZSMGwKQkF3d0NnWUlLd1lCQlFVSEF3RXdEUVlKS29aSWh2Y05BUUVMQlFBRGdnRUJBQnlTejJDeEZZRzQydTBhREc1SApIeU9GTHBLRDh3VVJ2ODBSeFFFWERNSnBWOVFTZUpxK2FMR1U5a2NYY0M4bXdZd2xvR2FmTEh0aGRoMzRWQzdHCkhEc1pRNEE1Q0FTYi9xcTFuQUFSbzJ5NkhJOGU4WDhUTU03SzNXMndodk9ScjU4bUxiWVFOMkZSQXlLaDI0MnQKVXNWTm5zRHU0aDlLcms3bk5sWCtaN2xKV3ltRGh4RDBSS3hyKzJqamFMVm9qOXhkZHU4ZkgxS2F3NjVQRGFYQgp3UUkra2lwWkRiS2dCVmxFVGFjcXNlbUt1L0I5NWtQYjFzRFR5SllrY2dUSDEwOGdPZklDYWVBN3JFUFpoaHRNCjlsZG8yU0VJTEpWWjJSV1NITlJId2xtMEl2UHR2YVpUYlk0UzNqV1R4UmxITjNJdzJzV2RFVWxMQlRHaXRMVGUKNS93PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    tls.key: LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2Z0lCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktnd2dnU2tBZ0VBQW9JQkFRRFdYZnVKNmRIVkswVDgKOFJvSUljaXI1WFR3QVNtT3pneTJBTDdvdFZaMjF1YzFJZFk1U0ZWbVZNOFMrT1lUZEEvRDlkcDdtYmE2WDJRQQpyK280d0d5b0thUm1wY1NCYkhRT3UwcTM3aVhzZUZkVStJRVlGcHdycmhxcE04MlVWNFVzQStrNUlBZ0tQL1RVCnRHV0tXcGYySUMraFBEeHpLT0p0QWE2MjUxdGhybzl0cjIyWGZXUDJXOXBjVDV2TkJvUCtNa0lCRUgzcTBHVzIKZ0pvWjA2WkpqaCtyZm0wMkl1YnIvNkRCeWJ3VjF5QVE3aFN1MEtJdDAySytVTzV0Wkc4bHlzUTMvcjJnLzZsSwo3cmFWOTVRTC9oMzBkU3pOUW40Q0RadjlHYSsxODdTV3BoajBzVmFXWHlIUlBjUm8rMHJnYTdpa243a3NtS050ClpuSzY0RkZiQWdNQkFBRUNnZ0VBRENTeHladTV1OElpTzlQcW5oaFAxbEQrd1ZQSGgyUHJ1Mm1xWnVOUzNST0sKY0d1VXg1VHQ1WWliWEY5R0pVYjNWNm4zTVBaQnNDZ1VNYWZGZEdhT0lTNk90aFBnNEZZRTh3cXdEbUJLdkswSwpnWEU4V3VGNUFrNXdDeks0akJVeklZMnRLZ1BEQU5XanFHTDV0NDh2T1kyVU5TV0U1UjhsU0hpR2JhMEljNjJGCnU5SkhqUDVGb1hRb0ZSVm1SalBwVmVlQUp1d1RxL29WWGV4TUlBNHVsZXlIS3JNZzJQWEpRSVlEVnlQeVh4ZFkKOHhZb0N3VW1mUk1sNndYakNieERBVDVvM3BrM1R1YW0vWDhTWG0zVGRYOVdIam9RcFRWbGsvY1FpNE1iOHpzRgovVVIwR2M3czhJM25hM3Nid0NFUXdmZ2xzQmRFUUtzaGYvN012Rk1EN1FLQmdRRHhpWlVPaUwwNVF6Y2dlWXN6ClJmcjdhQ3JKWHpsaXVQa3FsY3RIK0c2MmJSL0c4dU5PRzlRQ2FPczJPc3JSdzV1TUY4MGFNTTcwNWFScGhEQjEKZ0R4SEF2WVJicDhLcUZLQ2JRV1NXVEVrOVVEOU5VT25Hbmt0Q1RTdjlvcUJIK0NLaDY4a1gwQm5DOVlPZ0NLeApVendMYWNJdndTRFIxOW9iRGhtb1hRcStOUUtCZ1FEak0rcy9vUmFHb3lrSWpGM0cya010dHVYcmpaWDRlTFhNClI3bm5NSUpOZGpybUluZkhOa0s5NEF5SHIyczEwMTlsNFdhTDM4N0FpaXBJOXBBdFlGeXZVd21DMDdZYmtlWmIKeDg1VHJlSm5Sa09FQVVaK1o1WXpNVWMzZmpBUE9PSGhRVTZCSWdxRXc0bmV4N1ZoOUZtM3VJV2gxWnFyVi9WeAoyVzlzMGFFRFR3S0JnSGdLYzUwY2trWnlSR1NNWTRVaEE0S05HNjZtOThNN3dRSE1IcEp2UXI3QmJ5aVdNQ2Z5CnBxUm45blltTkFTYVhhVDdjMERQL3hzeFFrdjZtWWJjSzVqelBNNGZGMFhacitBSVJOdWVIbEdLM2ppNWp4enUKaUVpOHFZWEdWc0dqMFJtb0k0QkZJcUhUL1JlSjBUUWw5TktMUmlvcnBwOEQwdTdkVEIwajJLSDlBb0dCQUlGOApCMmhlQUI1L1FsVnkyY2NJZ1J5K2pjNXZCTGQwNC9jbU1aYkdtSnhZOHp4UkRINW1PQ2RLVnhuRktZNmxoa3JqCjZMTnl1N3dUZ2dIUE0yQUkrUW1hZzJNaUVUa3BMMlhETzUySkRlelpxSVRFelU0Zzd3TUI1SnFGdWhJUzB2aXoKWlhCRzNFUEp4UHRJU2VFbmh6SWpZVlZZRFN2MWx4WnBXdzFqY3lZVkFvR0JBTDgwc0JKTkQxcmRTUWtHdTloVQprSExwY1hVUG4ybEk5S2g0OTVpT1E2L21Bak9wb2FBQnhUZnNSQW1PTWwyeEdETlovKzdIK2hkaHZ1N2FyUmxBCjFNOGs2Y2d1WEhIaFNrUE5xN2c5VTVDS0d5N0xJY1NYZnJFWFRCVExuZDRHdkc5c1c5SkxTWDlLN1ljbWdQTzUKdnl5eHhFMkV6TU1wODVselZrYTFCVWNKCi0tLS0tRU5EIFBSSVZBVEUgS0VZLS0tLS0K
+  kind: Secret
+  metadata:
+    creationTimestamp: "2026-04-14T21:03:24Z"
+    name: airscan-tls
+    namespace: default
+    resourceVersion: "160424"
+    uid: 8237caf3-8494-4695-9e81-c235b389227c
+  type: kubernetes.io/tls
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{},"name":"airscan-ingress","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"airscan.aeralink.com","http":{"paths":[{"backend":{"service":{"name":"airscan-api","port":{"number":3000}}},"path":"/api","pathType":"Prefix"},{"backend":{"service":{"name":"airscan-web","port":{"number":80}}},"path":"/","pathType":"Prefix"}]}}],"tls":[{"hosts":["airscan.aeralink.com"],"secretName":"airscan-tls"}]}}
+    creationTimestamp: "2026-04-13T20:22:43Z"
+    generation: 2
+    name: airscan-ingress
+    namespace: default
+    resourceVersion: "394524"
+    uid: 91948973-e0d5-4558-a340-da410bb83205
+  spec:
+    ingressClassName: nginx
+    rules:
+    - host: airscan.aeralink.com
+      http:
+        paths:
+        - backend:
+            service:
+              name: airscan-api
+              port:
+                number: 3000
+          path: /api
+          pathType: Prefix
+        - backend:
+            service:
+              name: airscan-web
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
+    tls:
+    - hosts:
+      - airscan.aeralink.com
+      secretName: airscan-tls
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 172.16.40.110
+kind: List
+metadata:
+  resourceVersion: ""
